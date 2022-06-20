@@ -1,4 +1,6 @@
 package com.vgubert.loockjson.screens.main
 
-class MainFragmentViewModel {
+import androidx.lifecycle.ViewModel
+
+class MainFragmentViewModel: ViewModel() {
 }
