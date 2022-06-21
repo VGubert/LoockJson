@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.vgubert.loockjson.MAIN
 import com.vgubert.loockjson.R
 import com.vgubert.loockjson.models.MovieItemModel
 import kotlinx.android.synthetic.main.item_layout.view.*
@@ -22,6 +24,12 @@ class MainAdapter: RecyclerView.Adapter<MainAdapter.MyViewHolder>() {
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.itemView.item_title.text = listMovies[position].title
         holder.itemView.item_date.text = listMovies[position].release_date
+
+        Glide.with(MAIN)
+            .load(listMovies[position].poster_path)
+            .centerCrop()
+            .placeholder(R.drawable.ic_launcher_foreground)
+            .into(holder.itemView.item_img)
     }
 
     override fun getItemCount(): Int {
