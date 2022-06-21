@@ -32,8 +32,12 @@ class MainFragment : Fragment() {
 
     private fun init() {
         val viewModel = ViewModelProvider(this).get(MainFragmentViewModel::class.java)
+        viewModel.getMovies()
         recyclerView = binding.rvMain
         recyclerView.adapter = adapter
+        viewModel.myMovies.observe(viewLifecycleOwner) { list ->
+            adapter.setList(list.body()!!.movieItemModels)
+        }
     }
 
     override fun onDestroyView() {
