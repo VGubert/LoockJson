@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.vgubert.loockjson.MAIN
 import com.vgubert.loockjson.R
 import com.vgubert.loockjson.databinding.FragmentMainBinding
 
@@ -32,11 +34,15 @@ class MainFragment : Fragment() {
 
     private fun init() {
         val viewModel = ViewModelProvider(this).get(MainFragmentViewModel::class.java)
-        viewModel.getMovies()
         recyclerView = binding.rvMain
         recyclerView.adapter = adapter
-        viewModel.myMovies.observe(viewLifecycleOwner) { list ->
-            adapter.setList(list.body()!!.movieItemModels)
+        try {
+            viewModel.getMovies()
+            viewModel.myMovies.observe(viewLifecycleOwner) { list ->
+                adapter.setList(list.body()!!.results)
+            }
+        } catch (e: Exception) {
+            Toast.makeText(MAIN, e.message, Toast.LENGTH_SHORT).show()
         }
     }
 
