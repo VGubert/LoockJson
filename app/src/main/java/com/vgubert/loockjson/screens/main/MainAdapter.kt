@@ -26,7 +26,7 @@ class MainAdapter: RecyclerView.Adapter<MainAdapter.MyViewHolder>() {
         holder.itemView.item_date.text = listMovies[position].release_date
 
         Glide.with(MAIN)
-            .load(listMovies[position].poster_path)
+            .load("https://www.themoviedb.org/t/p/w600_and_h900_bestv2${listMovies[position].poster_path}")
             .centerCrop()
             .placeholder(R.drawable.ic_launcher_foreground)
             .into(holder.itemView.item_img)
