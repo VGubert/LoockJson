@@ -1,10 +1,8 @@
 package com.vgubert.loockjson.screens.main
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +22,7 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         mBinding = FragmentMainBinding.inflate(layoutInflater, container, false)
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -51,4 +50,18 @@ class MainFragment : Fragment() {
         mBinding = null
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.item_favorite -> {
+                MAIN.navController.navigate(R.id.action_mainFragment_to_favoriteFragment)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 }
