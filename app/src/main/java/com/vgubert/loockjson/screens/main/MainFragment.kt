@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vgubert.loockjson.MAIN
 import com.vgubert.loockjson.R
 import com.vgubert.loockjson.databinding.FragmentMainBinding
+import com.vgubert.loockjson.models.MovieItemModel
 
 class MainFragment : Fragment() {
 
@@ -62,6 +63,14 @@ class MainFragment : Fragment() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    companion object {
+        fun clickMovie(model: MovieItemModel){
+            val bundle = Bundle()
+            bundle.putSerializable("movie", model)
+            MAIN.navController.navigate(R.id.action_mainFragment_to_detailFragment, bundle)
         }
     }
 }
