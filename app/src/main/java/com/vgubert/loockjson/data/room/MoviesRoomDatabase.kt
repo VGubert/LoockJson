@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.vgubert.loockjson.data.room.dao.MoviesDao
 import com.vgubert.loockjson.models.MovieItemModel
 
-@Database(entities = [MovieItemModel::class], version = 1)
+@Database(entities = [MovieItemModel::class], version = 2)
 abstract class MoviesRoomDatabase: RoomDatabase() {
 
     abstract fun getMovieDao(): MoviesDao

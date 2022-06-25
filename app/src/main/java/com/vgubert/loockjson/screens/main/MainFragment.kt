@@ -34,10 +34,11 @@ class MainFragment : Fragment() {
 
     private fun init() {
         val viewModel = ViewModelProvider(this).get(MainFragmentViewModel::class.java)
+        viewModel.initDatabase()
         recyclerView = binding.rvMain
         recyclerView.adapter = adapter
         try {
-            viewModel.getMovies()
+            viewModel.getMoviesRetrofit()
             viewModel.myMovies.observe(viewLifecycleOwner) { list ->
                 adapter.setList(list.body()!!.results)
             }
