@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.vgubert.loockjson.MAIN
 import com.vgubert.loockjson.R
+import com.vgubert.loockjson.SaveShared
 import com.vgubert.loockjson.databinding.FragmentDetailBinding
 import com.vgubert.loockjson.databinding.FragmentMainBinding
 import com.vgubert.loockjson.models.MovieItemModel
@@ -39,7 +40,14 @@ class DetailFragment : Fragment() {
     }
 
     private fun init() {
+        val valueBool = SaveShared.getFavorite(MAIN, currentMovie.id.toString())
         val viewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
+
+        if(isFavorite != valueBool) {
+            binding.imgDetailFavorite.setImageResource(R.drawable.ic_favorite_fill)
+        } else {
+            binding.imgDetailFavorite.setImageResource(R.drawable.ic_favorite)
+        }
         Glide.with(MAIN)
             .load("https://www.themoviedb.org/t/p/w600_and_h900_bestv2${currentMovie.poster_path}")
             .centerCrop()
@@ -50,11 +58,15 @@ class DetailFragment : Fragment() {
         binding.tvDescription.text = currentMovie.overview
 
         binding.imgDetailFavorite.setOnClickListener {
-            if(!isFavorite) {
+            if(isFavorite == valueBool) {
                 binding.imgDetailFavorite.setImageResource(R.drawable.ic_favorite_fill)
+                SaveShared.setFavorite(MAIN, currentMovie.id.toString(), true)
+                viewModel.insert(currentMovie) {}
                 isFavorite = true
             } else {
                 binding.imgDetailFavorite.setImageResource(R.drawable.ic_favorite)
+                viewModel.delete(currentMovie) {}
+                SaveShared.setFavorite(MAIN, currentMovie.id.toString(), false)
                 isFavorite = false
             }
         }

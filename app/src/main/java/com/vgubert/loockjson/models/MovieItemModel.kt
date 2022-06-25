@@ -10,17 +10,12 @@ data class MovieItemModel(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
 
-    @ColumnInfo
     val overview: String,
 
-
-    @ColumnInfo
     val poster_path: String,
 
-    @ColumnInfo
     val release_date: String,
 
-    @ColumnInfo
     val title: String
 
 ) : Serializable

@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vgubert.loockjson.MAIN
+import com.vgubert.loockjson.REALISATION
 import com.vgubert.loockjson.data.retrofit.RetrofitRepository
 import com.vgubert.loockjson.data.room.MoviesRoomDatabase
 import com.vgubert.loockjson.data.room.repository.MoviesRepositoryRealisation
@@ -34,7 +35,7 @@ class MainFragmentViewModel(application: Application): AndroidViewModel(applicat
     }
     fun initDatabase(){
         val daoMovie = MoviesRoomDatabase.getInstance(context).getMovieDao()
-        realisation = MoviesRepositoryRealisation(daoMovie)
+        REALISATION = MoviesRepositoryRealisation(daoMovie)
     }
 
 }
